@@ -12,7 +12,8 @@ node parser.spec.js
 
 ##### `async parser.load(path)`
 
-* Load Ngspice **ASCII** raw file asynchronously. 
+* Load Ngspice **ASCII** raw file asynchronously.
+
   * To change Ngspice rawfile format to `ascii`, add a line `set filetype=ascii` in your `.spiceinit`.
 
 ##### `parser.summarize()`
@@ -21,47 +22,42 @@ node parser.spec.js
 
 ##### `parser.get()`
 
-* Return a `Data` object of the parsed data.
+* Return the parsed data in the following format.
 
-### Object Format
-
-* `Data`: An array containing all plots.
+* An array containing all plots (e.g. Operating Points, Transient Analysis). Each plot is an object.
 
   ```javascript
-  Array.<Plot>
+  [
+    {
+      title: String, /* Title */
+      date: String, /* Date */
+      name: String, /* Plotname */
+      flags: String, /* Flags */
+      nVariables: Integer, /* No. Variables */
+      nPoints: Integer, /* No. Points */
+      variables: [
+        {
+          index: Integer, /* The index of data values in "Point" array. */
+          name: String, /* Name of the variable. */
+          type: String /* Type of the variable, e.g. voltage, current. Ngspice sometimes gives wrong type. */
+        }
+      ],
+      values: [
+        [ Float ] /* An array of float numbers. */
+      ]
+    }
+  ]
   ```
 
-* `Plot`: A plot, e.g. Operating Points, Transient Analysis.
+* Note
 
+  For a variable :
   ```javascript
   {
-    title: String, /* Title */
-    date: String, /* Date */
-    name: String, /* Plotname */
-    flags: String, /* Flags */
-    nVariables: Integer, /* No. Variables */
-    nPoints: Integer, /* No. Points */
-    variables: Array.<Variable>, /* Variables */
-    values: Array.<Point> /* Values */
+    index: 3,
+    name: "xxx",
+    type: "yyy"
   }
   ```
 
-* `Variable`
-
-  ```javascript
-  {
-    index: Integer, /* The index of data values in "Point" array. */
-    name: String, /* Name of the variable. */
-    type: String /* Type of the variable, e.g. voltage, current. Ngspice sometimes gives wrong results. */
-  }
-  ```
-
-* `Point`
-
-  ```javascript
-  Array.<Float> /* Data values in the order of "Variable" index. */
-  ```
-
-  * Example
-    
-    If `Variable.index` is `i`, its data values are at index `i` of a `Point` array.
+  Data of the variable are `values[0][3]`, `values[1][3]`, ... `values[nPoints-1][3]`.

@@ -1,3 +1,7 @@
+/**
+ * @module parser
+ */
+
 const readline = require('readline');
 const path = require('path');
 const fs = require('fs');
@@ -6,6 +10,11 @@ function parser(opts) {
 
   let data = [];
 
+  /**
+   * Load a Ngspice ASCII rawfile.
+   * @param {string} file - Path to the rawfile.
+   * @returns {Promise}
+   */
   this.load = (file) => {
     return new Promise((resolve, reject) => {
       let fullPath = path.resolve(file);
@@ -112,6 +121,9 @@ function parser(opts) {
 
   }
 
+  /**
+   * Get summary of the data.
+   */
   this.summarize = () => {
     const plots = [];
     for (let i = 0; i < data.length; ++i) {
@@ -128,6 +140,9 @@ function parser(opts) {
     }
   }
 
+  /**
+   * Get full data.
+   */
   this.getResult = () => {
     return data;
   }
