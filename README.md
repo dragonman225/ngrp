@@ -2,13 +2,23 @@
 
 > A Ngspice **ASCII** rawfile parser written in Javascript. Dependent on Node.js.
 
-### Run the Example
+## Installation
 
 ```bash
-node parser.spec.js
+npm install dragonman225/ngrp
 ```
 
-### API
+## Run the Example
+
+```bash
+npm run test
+```
+
+Take a look at `parser.spec.js` in folder `test` to see how it works.
+
+## API
+
+### Instance `parser`
 
 ##### `async parser.load(path)`
 
@@ -20,7 +30,7 @@ node parser.spec.js
 
 * Return a summary object of the parsed data.
 
-##### `parser.get()`
+##### `parser.getResults()`
 
 * Return the parsed data in the following format.
 
@@ -29,9 +39,9 @@ node parser.spec.js
   ```javascript
   [
     {
-      title: String, /* Title */
+      title: String, /* Title. Normally empty. */
       date: String, /* Date */
-      name: String, /* Plotname */
+      name: String, /* Plotname. Name of the plot. */
       flags: String, /* Flags */
       nVariables: Integer, /* No. Variables */
       nPoints: Integer, /* No. Points */
@@ -61,3 +71,18 @@ node parser.spec.js
   ```
 
   Data of the variable are `values[0][3]`, `values[1][3]`, ... `values[nPoints-1][3]`.
+
+##### `parser.getResultsCSV()`
+
+* Return CSV strings of all plots.
+
+  ```javascript
+  [
+      String, /* Plot 1 CSV string */
+      String, /* Plot 2 CSV string */
+      ...
+  ]
+  ```
+
+  
+
