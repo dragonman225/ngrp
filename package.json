@@ -1,0 +1,29 @@
+{
+  "name": "ngrp",
+  "version": "0.1.0",
+  "description": "A Ngspice ASCII rawfile parser written in Javascript.",
+  "main": "parser.js",
+  "scripts": {
+    "test": "node test/parser.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dragonman225/ngrp.git"
+  },
+  "keywords": [
+    "ngspice",
+    "spice",
+    "electronics",
+    "ic-design",
+    "eda"
+  ],
+  "author": "dragonman225",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dragonman225/ngrp/issues"
+  },
+  "homepage": "https://github.com/dragonman225/ngrp#readme",
+  "devDependencies": {
+    "eslint": "^6.0.0"
+  }
+}
